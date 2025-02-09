@@ -15,16 +15,12 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(cors({credentials:true})); //by giving the credentials true we can pass the cookie
 
-
 //api endpointes 
-
-
 app.get('/',(req,res)=>{
     res.send("API working")
 })
 app.use('/api/auth',authRouter)
 app.use('/api/user',userRouter)
-
 
 app.listen(port,()=>{
     console.log(`server started on port : ${port}`);

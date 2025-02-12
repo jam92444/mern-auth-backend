@@ -2,6 +2,7 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import userModel from "../models/userModel.js";
 import transporter from "../config/nodeMailer.js";
+import { EMAIL_VERIFY_TEMPLATE,PASSWORD_RESET_TEMPLATE } from "../config/emailTemplates.js";
 
 export const register = async (req, res) => {
   const { name, email, password } = req.body;
@@ -143,7 +144,8 @@ export const sendVerifyOtp = async (req, res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "Account Verification One Time Password (OTP)",
-      text: `Your OTP(One Time Password) is ${otp}. Verify your account using this otp. This OTP will be expired with in 24 hrs.`,
+      // text: `Your OTP(One Time Password) is ${otp}. Verify your account using this otp. This OTP will be expired with in 24 hrs.`,
+      html: EMAIL_VERIFY_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email)
     };
 
     //sending mail
@@ -237,7 +239,8 @@ export const sendResetOtp = async (req,res) => {
       from: process.env.SENDER_EMAIL,
       to: user.email,
       subject: "Password Reset One Time Password (OTP)",
-      text: `Your OTP(One Time Password) for resetting the password is ${otp}. Verify your account using this otp. Use this OTP to proceed resetting the password. NOTE: OTP will be expired in 15 min.`,
+      // text: `Your OTP(One Time Password) for resetting the password is ${otp}. Verify your account using this otp. Use this OTP to proceed resetting the password. NOTE: OTP will be expired in 15 min.`,
+      html: PASSWORD_RESET_TEMPLATE.replace("{{otp}}",otp).replace("{{email}}",user.email)
     };
 
     //sending mail

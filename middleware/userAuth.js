@@ -14,7 +14,7 @@ const userAuth = async (req, res, next) => {
     //to verify we need to decode the token to do we use jwt
     const tokenDecode = jwt.verify(token,process.env.JWT_SECRET);
 
-    //fron tokenDecode we need to find the userId
+    //from tokenDecode we need to find the userId
     if(tokenDecode.id){
         req.body.userId = tokenDecode.id;
 

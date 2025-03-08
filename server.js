@@ -11,7 +11,7 @@ const app = express();
 const port = process.env.PORT || 4000
 connectDB();
 
-const allowedOrigins = ['https://mern-auth-backend-iota.vercel.app']
+const allowedOrigins = ['https://authmyj.vercel.app']
 
 app.use(express.json());    
 app.use(cookieParser());

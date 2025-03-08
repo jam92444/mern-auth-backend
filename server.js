@@ -15,7 +15,11 @@ const allowedOrigins = ['https://authmyj.vercel.app']
 
 app.use(express.json());    
 app.use(cookieParser());
-app.use(cors({origin:allowedOrigins,credentials:true})); //by giving the credentials true we can pass the cookie
+app.use(cors({
+  origin: allowedOrigins,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Ensure these methods are allowed
+}));
 
 //api endpointes 
 app.get('/',(req,res)=>{

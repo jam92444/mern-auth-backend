@@ -20,7 +20,6 @@ app.use(cors({
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],  // Ensure these methods are allowed
 }));
-app.options('*', cors());
 
 //api endpointes 
 app.get('/',(req,res)=>{
